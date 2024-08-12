@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>aps-environment</key>
+	<string>development</string>
+	<key>com.apple.developer.applesignin</key>
+	<array>
+		<string>Default</string>
+	</array>
+	<key>com.apple.developer.associated-domains</key>
+	<array>
+		<string>https://www.felsport.com</string>
+		<string>https://felsport.com</string>
+		<string>http://www.felsport.com</string>
+		<string>applinks:www.felsport.com</string>
+        <string>webcredentials:www.felsport.com</string>
+		<string>applinks:felsport.com</string>
+        <string>webcredentials:felsport.com</string>
+	</array>
+</dict>
+</plist>

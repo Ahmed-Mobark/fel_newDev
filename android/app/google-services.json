@@ -1,0 +1,78 @@
+{
+  "project_info": {
+    "project_number": "1004845702880",
+    "project_id": "footballapp-ea132",
+    "storage_bucket": "footballapp-ea132.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1004845702880:android:5d0578543187a864803a85",
+        "android_client_info": {
+          "package_name": "com.felapp.sports.football_appnew"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1004845702880-0gpi821i47ra1tq16gi223l3d6g8c5b3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.felapp.sports.football_appnew",
+            "certificate_hash": "60c736d274e55c0401e708e8d294909bc85f7d66"
+          }
+        },
+        {
+          "client_id": "1004845702880-i8ol4otb4r5udq36695iddnkrlbdfvi2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.felapp.sports.football_appnew",
+            "certificate_hash": "3d52f988fe27442941c7eb3d21611643e0b2bd6c"
+          }
+        },
+        {
+          "client_id": "1004845702880-l4ud9ql1u1e0pltjjsc280mjbl0ccdg8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.felapp.sports.football_appnew",
+            "certificate_hash": "60cfdfa716066ff3d8739b989b9698ac527ff086"
+          }
+        },
+        {
+          "client_id": "1004845702880-p4ojc5dmb9n8fbohi33gn9mdhuehccgb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.felapp.sports.football_appnew",
+            "certificate_hash": "5a6e9f8b344972a45e30f1c7e06d719625f172c9"
+          }
+        },
+        {
+          "client_id": "1004845702880-kovvelaf2mo7q22490391evb97s0bkjm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGyf1G9luSJ3zNia-PUQJb7gBLJV8no2A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1004845702880-kovvelaf2mo7q22490391evb97s0bkjm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1004845702880-2hn3q6fmv9c7f3urbn98efqleuavk65j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fel.sports.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

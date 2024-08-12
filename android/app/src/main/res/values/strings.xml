@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FEL-SPORT</string>
+    <string name="facebook_app_id">845989476993843</string>
+    <string name="facebook_client_token">b371947c30b887a79446af9328bc4885</string>
+<!--    <string name="default_web_client_id">597351982329-n2l3ifmcqqjh3jln1kag8oom4ajo8kv2.apps.googleusercontent.com</string>-->
+</resources>

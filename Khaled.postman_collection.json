@@ -1,0 +1,1206 @@
+{
+	"info": {
+		"_postman_id": "5bed426e-3d8b-4a52-9e00-c9113a1dca6d",
+		"name": "Khaled",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29225929"
+	},
+	"item": [
+		{
+			"name": "8-ItemApp",
+			"item": [
+				{
+					"name": "GetAllItems",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"searchText\":\"\",\r\n    \"category\": 3,\r\n    \"take\":10,\r\n    \"skip\":0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/Item/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Item",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PurchaseItem",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"itemId\":\"1d6f0bce-cffd-477b-a5bc-21905ead15ae\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/Item/purchase",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Item",
+								"purchase"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2-UserProfile",
+			"item": [
+				{
+					"name": "GetUserItems",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category\": 0,\r\n    \"take\":10,\r\n    \"skip\":0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/profile/items",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"profile",
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateTShirtPhoto",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"itemId\":\"16e36a6c-ce39-496f-b977-030e80f5ddc4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/profile/updateshirtphoto",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"profile",
+								"updateshirtphoto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateProfilePhoto",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"itemId\":\"4825eba4-d943-4309-a6a0-f5261de51e62\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/profile/updateprofilephoto",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"profile",
+								"updateprofilephoto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserTransactions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"skip\":0,\r\n    \"take\":10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/profile/transactions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"profile",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "14-CoinApp",
+			"item": [
+				{
+					"name": "BuyByGoogle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\":\"\",\r\n    \"purchaseId\":\"\",\r\n    \"transactionDate\":\"\",\r\n    \"verificationDateSource\":\"\",\r\n    \"serverVerificationData\":\"\",\r\n    \"localVerificationData\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/coinoffer/buybygoogle",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"coinoffer",
+								"buybygoogle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllOffers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/coinoffer/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"coinoffer",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllAdminOffers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/coinoffer",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"coinoffer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpsertCoinOffer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "felcoins600",
+									"type": "text"
+								},
+								{
+									"key": "offerName",
+									"value": "Coins600",
+									"type": "text"
+								},
+								{
+									"key": "coinsAmount",
+									"value": "600",
+									"type": "text"
+								},
+								{
+									"key": "coinsPrice",
+									"value": "15",
+									"type": "text"
+								},
+								{
+									"key": "logo",
+									"type": "file",
+									"src": "/D:/1-data/1-Projects/6-Football_App/3-documentation/coin600.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/coinoffer",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"coinoffer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RemoveCoinOffer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"felcoin400\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/coinoffer/remove",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"coinoffer",
+								"remove"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BuyByApple",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/coinoffer/buybyapple",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"coinoffer",
+								"buybyapple"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserItemsIds",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/item/useritemsids",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"item",
+								"useritemsids"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "6-GroupApp Copy",
+			"item": [
+				{
+					"name": "GetAllGroup",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"skip\":0,\r\n    \"take\":100,\r\n    \"groupName\":\"\",\r\n    \"leagueId\":0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/group/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"group",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetGroupById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"8bced991-6860-42f1-b15b-a117b8257036\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/group/detail",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"group",
+								"detail"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllGroupMembers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"groupId\":\"057f8a65-707b-448a-b63e-985e7be623cb\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/group/members",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"group",
+								"members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllGroupMembersRound",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"groupId\":\"057f8a65-707b-448a-b63e-985e7be623cb\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/group/roundmembers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"group",
+								"roundmembers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetSponsorGroups",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/group/sponsors",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"group",
+								"sponsors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetGroupMatches",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"groupId\":\"cb9ce5e7-36a4-4382-8cb8-1acf83796418\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/group/matches",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"group",
+								"matches"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpsertGroup",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"\",\r\n    \"name\":\"7 الدوام\",\r\n    \"description\":\"تمتع بالكره السعوديه\",\r\n    \"isPrivate\":true,\r\n    \"maxMembers\":0,\r\n    \"leagueId\":308\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/group",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"group"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpsertSponsorGroup",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "",
+									"type": "default"
+								},
+								{
+									"key": "name",
+									"value": "Adidas1",
+									"type": "default"
+								},
+								{
+									"key": "description",
+									"value": "it is specialized in Sports Wear institue",
+									"type": "default"
+								},
+								{
+									"key": "logo",
+									"type": "file",
+									"src": "/D:/1-data/1-Projects/6-Football_App/3-documentation/logos/OIP (1).jpeg"
+								},
+								{
+									"key": "isPrivate",
+									"value": "true",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "01203323890",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "isSponsor",
+									"value": "true",
+									"type": "default"
+								},
+								{
+									"key": "maxMembers",
+									"value": "1000",
+									"type": "default"
+								},
+								{
+									"key": "leagueId",
+									"value": "307",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/group/sponsor",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"group",
+								"sponsor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "JoinGroup",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"groupId\":\"2b67c792-0f11-4e7c-9e67-b7ed53897ec8\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/group/join",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"group",
+								"join"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "JoinPrivateGroup",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"groupCode\":\"2الاقوياءq46rvu\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/group/join/private",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"group",
+								"join",
+								"private"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LeaveGroup",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"groupId\":\"8bced991-6860-42f1-b15b-a117b8257036\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/group/leave",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"group",
+								"leave"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RemoveGroup",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"9ae86533-3885-4b46-92a4-9c0bdd53fbff\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/group/remove",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"group",
+								"remove"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PredictGroupMatch",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"groupId\":\"2b67c792-0f11-4e7c-9e67-b7ed53897ec8\",\r\n    \"matchId\":1074278,\r\n    \"bouns\":0,\r\n    \"homeGoals\":3,\r\n    \"awayGoals\":3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/group/predict",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"group",
+								"predict"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserGroupHistory",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"groupId\":\"730171b4-d7c1-4f50-8cab-9cf5d2a56332\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/group/memberhistory",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"group",
+								"memberhistory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RemoveSponsorGroup",
+					"request": {
+						"auth": {
+							"type": "basic"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"287bde91-847b-4bcb-8a0d-24b6056cd1a7\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/group/remove",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"group",
+								"remove"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserGroupsList",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"skip\":0,\r\n    \"take\":100,\r\n    \"groupName\":\"\",\r\n    \"leagueId\":0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/group/usergroups",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"group",
+								"usergroups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserGroupsIdsList",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/group/usergroupsids",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"group",
+								"usergroupsids"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateGroupPhoto",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"itemId\":\"1d6f0bce-cffd-477b-a5bc-21905ead15ae\",\r\n    \"groupId\":\"0ec86e15-37d8-4232-9c97-bc7141368806\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/group/updategroupphoto",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"group",
+								"updategroupphoto"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
