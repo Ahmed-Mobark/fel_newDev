@@ -1019,9 +1019,15 @@ class ApiProvider {
         await refreshToken();
         getHomePageData();
       }
-      ScaffoldMessenger.of(navigatorKey.currentContext!).showSnackBar(
-        errorSnackBar(e.response?.data['message']),
-      );
+      final rxPrefs = RxSharedPreferences(SharedPreferences.getInstance());
+
+      bool isVisteror = (await rxPrefs.getBool('isVis'))!;
+
+      if (isVisteror == false) {
+        ScaffoldMessenger.of(navigatorKey.currentContext!).showSnackBar(
+          errorSnackBar(e.response?.data['message']),
+        );
+      }
       return e.response?.data['message'];
     }
   }
@@ -1462,6 +1468,10 @@ class ApiProvider {
         rxPrefs.setString(
           'expDate',
           DateTime.now().add(const Duration(hours: 24)).toString(),
+        );
+        rxPrefs.setBool(
+          'isVis',
+          true,
         );
         final validMap = json.decode(json.encode(response.data));
         GuestModel resp = GuestModel.fromJson(validMap);

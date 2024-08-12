@@ -312,9 +312,14 @@ class AuthNotifier extends ChangeNotifier {
         notifyListeners();
       });
     } catch (e) {
-      ScaffoldMessenger.of(navigatorKey.currentContext!).showSnackBar(
-        errorSnackBar(e.toString()),
-      );
+      bool isVisteror = (await rxPrefs.getBool('isVis'))!;
+
+      if (isVisteror == true) {
+      } else {
+        ScaffoldMessenger.of(navigatorKey.currentContext!).showSnackBar(
+          errorSnackBar(e.toString()),
+        );
+      }
       _userLoading = false;
       notifyListeners();
     }

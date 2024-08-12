@@ -47,8 +47,6 @@ class _ProfilePageState extends State<ProfilePage> {
     final StoreNotifier storeNotifier =
         Provider.of<StoreNotifier>(context, listen: true);
 
-    final bottomNavigationBarNotifier =
-        Provider.of<BottomNavigationBarNotifier>(context, listen: true);
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -70,9 +68,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Column(
                   children: [
                     InkWell(
-                      // onTap: () {
-                      //   authNotifier.selectProfilePhoto();
-                      // },
                       child: Stack(
                         alignment: Alignment.bottomRight,
                         children: [
@@ -96,8 +91,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                               storeNotifier.profilePic ?? '',
                                           width:
                                               MediaQuery.of(context).size.width,
-                                          // height: 80.h,
-                                          // fit: BoxFit.cover,
                                           imageBuilder:
                                               (context, imageProvider) =>
                                                   Container(
@@ -105,7 +98,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                               // shape: BoxShape.circle,
                                               image: DecorationImage(
                                                 image: imageProvider,
-                                                // fit: BoxFit.cover,
                                               ),
                                             ),
                                           ),
@@ -124,16 +116,12 @@ class _ProfilePageState extends State<ProfilePage> {
                                               '',
                                           width:
                                               MediaQuery.of(context).size.width,
-                                          // height: 80.h,
-                                          // fit: BoxFit.cover,
                                           imageBuilder:
                                               (context, imageProvider) =>
                                                   Container(
                                             decoration: BoxDecoration(
-                                              // shape: BoxShape.circle,
                                               image: DecorationImage(
                                                 image: imageProvider,
-                                                // fit: BoxFit.cover,
                                               ),
                                             ),
                                           ),
@@ -149,100 +137,67 @@ class _ProfilePageState extends State<ProfilePage> {
                                             size: 50,
                                           ),
                                         ),
-                              // ? Image.network(
-                              //     storeNotifier.profilePic ?? '',
-                              //     fit: BoxFit.cover,
-                              //     width:
-                              //         MediaQuery.of(context).size.width,
-                              //   )
-                              // : Image.network(
-                              //     authNotifier.userModel.data
-                              //             ?.profilePhoto ??
-                              //         '',
-                              //     fit: BoxFit.cover,
-                              //     width:
-                              //         MediaQuery.of(context).size.width,
-                              //   ),
                             ),
                           ),
-                          // Container(
-                          //   height: 32,
-                          //   width: 32,
-                          //   alignment: Alignment.center,
-                          //   decoration: BoxDecoration(
-                          //     shape: BoxShape.circle,
-                          //     color: kColorCardHint,
-                          //   ),
-                          //   child: Icon(
-                          //     Icons.camera_alt_outlined,
-                          //     color: kColorAccent,
-                          //     size: 18,
-                          //   ),
-                          // ),
                         ],
                       ),
                     ),
                     SizedBox(height: 1.h),
-                    // Text(
-                    //   '${authNotifier.userModel.data!.firstName}',
-                    //   style: Get.textTheme.displayLarge?.copyWith(
-                    //     fontFamily: "Algerian",
-                    //     fontSize: 14.sp,
-                    //   ),
-                    // ),
                   ],
                 ),
               ),
             ],
-            SliverToBoxAdapter(
-              child: HorizontalAnimation(
-                duration: 200,
-                child: Stack(
-                  alignment: Alignment.bottomRight,
-                  children: [
-                    const _UserImage(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 8,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: kColorCardHint,
-                            ),
-                            child: Column(
-                              children: [
-                                Text(
-                                  authNotifier.userModel.data!.pointsEarned
-                                      .toString(),
-                                  style: Get.textTheme.displayLarge?.copyWith(
-                                    fontFamily: "Algerian",
-                                    fontSize: 12.sp,
+            if (token != null) ...[
+              SliverToBoxAdapter(
+                child: HorizontalAnimation(
+                  duration: 200,
+                  child: Stack(
+                    alignment: Alignment.bottomRight,
+                    children: [
+                      const _UserImage(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 8,
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: kColorCardHint,
+                              ),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    authNotifier.userModel.data!.pointsEarned
+                                        .toString(),
+                                    style: Get.textTheme.displayLarge?.copyWith(
+                                      fontFamily: "Algerian",
+                                      fontSize: 12.sp,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  'Points',
-                                  style: Get.textTheme.titleSmall?.copyWith(
-                                    fontFamily: "Algerian",
-                                    fontSize: 12.sp,
-                                  ),
-                                ).tr(),
-                              ],
+                                  Text(
+                                    'Points',
+                                    style: Get.textTheme.titleSmall?.copyWith(
+                                      fontFamily: "Algerian",
+                                      fontSize: 12.sp,
+                                    ),
+                                  ).tr(),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
+            ],
             if (token != null) ...[
               SliverSizedBox(height: 2.h),
               const SliverToBoxAdapter(
@@ -269,15 +224,36 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ],
             SliverSizedBox(height: 2.h),
-            const SliverToBoxAdapter(
-              child: HorizontalAnimation(
-                duration: 800,
-                child: TextTileFeed(
-                  label: 'My Groups',
-                  icon: Icons.groups,
-                ),
-              ),
-            ),
+            token != null
+                ? const SliverToBoxAdapter(
+                    child: HorizontalAnimation(
+                      duration: 800,
+                      child: TextTileFeed(
+                        label: 'My Groups',
+                        icon: Icons.groups,
+                      ),
+                    ),
+                  )
+                : ListTile1(
+                    text: tr('Login'),
+                    icon: Ionicons.log_in,
+                    onTap: () async {
+                      // rxPrefs.remove('token');
+                      rxPrefs.remove('guestToken');
+                      rxPrefs.remove('isVis');
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const LoginScreen(),
+                        ),
+                        (route) => false,
+                      );
+                      // authNotifier.logout();
+
+                      // bottomNavigationBarNotifier.setNavbarIndex(0);
+                    },
+                    duration: 800,
+                  ),
             SliverSizedBox(
               height: 2.h,
             ),
@@ -464,7 +440,9 @@ class _AppBar extends StatelessWidget {
         ).tr(),
       ),
       leadingWidth: 100,
-      leading: UserCoins(authNotifier.userModel.data!.coinsBalance.toString()),
+      leading: authNotifier.userModel.data == null
+          ? const SizedBox()
+          : UserCoins(authNotifier.userModel.data!.coinsBalance.toString()),
       actions: [
         InkWell(
           onTap: () => Get.to(() => const Settings()),

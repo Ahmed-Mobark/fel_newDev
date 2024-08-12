@@ -57,6 +57,7 @@ class _GroupsScreenState extends State<GroupsScreen> {
         appBar: widget.withAppBar == true
             ? AppBar(
                 centerTitle: true,
+                automaticallyImplyLeading:false,
                 title: FadeIn(
                   duration: const Duration(milliseconds: 900),
                   child: Text(
@@ -662,20 +663,12 @@ class _GroupCardState extends State<GroupCard> {
                   ),
                   Text(
                     Get.locale.toString() == 'ar'
-                        ? groupNotifier
-                                .userGroups[widget.index].group!.arGroupRules ??
-                            ''
+                        ? widget.group.arGroupRules ?? ''
                         : Get.locale.toString() == 'en'
-                            ? groupNotifier.userGroups[widget.index].group!
-                                    .groupRules ??
-                                ''
+                            ? widget.group.groupRules ?? ''
                             : Get.locale.toString() == 'es'
-                                ? groupNotifier.userGroups[widget.index].group!
-                                        .esGroupRules ??
-                                    ''
-                                : groupNotifier.userGroups[widget.index].group!
-                                        .poGroupRules ??
-                                    '',
+                                ? widget.group.esGroupRules ?? ''
+                                : widget.group.poGroupRules ?? '',
                     maxLines: 8,
                     style: Get.textTheme.bodySmall?.copyWith(
                       fontFamily: "Algerian",

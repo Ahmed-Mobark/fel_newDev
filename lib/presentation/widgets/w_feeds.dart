@@ -24,7 +24,6 @@ import 'package:rx_shared_preferences/rx_shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
 import '../notifiers/auth_notifier.dart';
-import '../screens/notifications/notificationScreen.dart';
 
 class AdminChallengesCard extends StatelessWidget {
   const AdminChallengesCard({

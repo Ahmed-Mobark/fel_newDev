@@ -70,6 +70,7 @@ class _AppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
+      iconTheme: const IconThemeData(color: Colors.white),
       centerTitle: true,
       title: FadeIn(
         duration: const Duration(milliseconds: 500),

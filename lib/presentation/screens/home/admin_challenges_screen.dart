@@ -27,6 +27,7 @@ class _MainChallengeScreenState extends State<MainChallengeScreen> {
       child: Scaffold(
         appBar: AppBar(
           toolbarHeight: 8.h,
+          automaticallyImplyLeading: false,
           title: FadeIn(
             child: Container(
               height: 5.h,
@@ -52,7 +53,7 @@ class _MainChallengeScreenState extends State<MainChallengeScreen> {
                 tabs: [
                   Tab(
                     child: Text(
-                      tr('Groups'),
+                      tr('Admin Challenges'),
                       style: const TextStyle(
                         fontSize: 14,
                       ), // Reduce font size to decrease height
@@ -60,7 +61,7 @@ class _MainChallengeScreenState extends State<MainChallengeScreen> {
                   ),
                   Tab(
                     child: Text(
-                      tr('Admin Challenges'),
+                      tr('Groups'),
                       style: const TextStyle(
                         fontSize: 14,
                       ), // Reduce font size to decrease height
@@ -71,12 +72,13 @@ class _MainChallengeScreenState extends State<MainChallengeScreen> {
             ),
           ),
         ),
-        body: TabBarView(
+        body:  TabBarView(
           children: [
+            // First tab content
+            AdminChallengesScreen(), // Second tab content
             GroupsScreen(
               withAppBar: false,
-            ), // First tab content
-            const AdminChallengesScreen(), // Second tab content
+            ),
           ],
         ),
       ),

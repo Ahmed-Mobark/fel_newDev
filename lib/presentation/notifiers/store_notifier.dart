@@ -242,9 +242,9 @@ class StoreNotifier extends ChangeNotifier {
       await authNotifier.getUserData();
       notifyListeners();
     } catch (e) {
-      ScaffoldMessenger.of(navigatorKey.currentContext!).showSnackBar(
-        errorSnackBar(e.toString()),
-      );
+      // ScaffoldMessenger.of(navigatorKey.currentContext!).showSnackBar(
+      //   errorSnackBar(e.toString()),
+      // );
     }
   }
 

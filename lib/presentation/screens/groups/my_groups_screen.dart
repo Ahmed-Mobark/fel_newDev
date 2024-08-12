@@ -28,6 +28,7 @@ class _MyGroupsScreenState extends State<MyGroupsScreen> {
     final groupsNotifier = Provider.of<GroupNotifier>(context, listen: true);
     return Scaffold(
       appBar: AppBar(
+            iconTheme: const IconThemeData(color: Colors.white),
         centerTitle: true,
         title: Text(
           'My Groups',

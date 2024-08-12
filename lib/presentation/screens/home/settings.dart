@@ -111,7 +111,7 @@ class _SettingsState extends State<Settings> {
           //   ),
           // )),
           if (isNotBlank(authNotifier.userModel.data?.email)) ...{
-            _ListTile(
+            ListTile1(
               text: authNotifier.userModel.data?.email ?? '',
               onTap: null,
               icon: Icons.email_outlined,
@@ -121,7 +121,7 @@ class _SettingsState extends State<Settings> {
             const _Divider(),
             SliverSizedBox(height: 1.h),
           },
-          _ListTile(
+          ListTile1(
             text: tr('Language'),
             icon: Ionicons.language,
             onTap: null,
@@ -183,7 +183,7 @@ class _SettingsState extends State<Settings> {
           // if (token != null) ...{
           //   const _Divider(),
           //
-          //   // _ListTile(
+          //   // ListTile1(
           //   //   text: tr('Challenges History'),
           //   //   icon: Ionicons.football,
           //   //   onTap: () => Get.to(() => const ChallengesHistoryScreen()),
@@ -191,7 +191,7 @@ class _SettingsState extends State<Settings> {
           //   // ),
           // },
           //mobark
-          _ListTile(
+          ListTile1(
             text: tr('notifications'),
             icon: Ionicons.notifications,
             trailing: CupertinoSwitch(
@@ -206,7 +206,7 @@ class _SettingsState extends State<Settings> {
             onTap: () {},
             duration: 700,
           ),
-          _ListTile(
+          ListTile1(
             text: tr('Guide Line'),
             icon: Ionicons.accessibility,
             trailing: CupertinoSwitch(
@@ -235,7 +235,7 @@ class _SettingsState extends State<Settings> {
             onTap: () {},
             duration: 700,
           ),
-          _ListTile(
+          ListTile1(
             text: tr('Privacy Policy'),
             icon: Ionicons.clipboard_outline,
             onTap: () => Get.to(() => const PolicyScreen()),
@@ -243,21 +243,21 @@ class _SettingsState extends State<Settings> {
             //     launchUrlString('http://www.felsport.com/privacypolicy'),
             duration: 700,
           ),
-          _ListTile(
+          ListTile1(
             text: tr('Terms Of Use'),
             icon: Ionicons.clipboard,
             onTap: () => Get.to(() => const TermsScreen()),
             // onTap: () => launchUrlString('https://www.felsport.com/termofuse'),
             duration: 750,
           ),
-          _ListTile(
+          ListTile1(
             text: tr('support'),
             icon: Ionicons.help_circle_outline,
             onTap: () => Get.to(() => const SupportScreen()),
             duration: 750,
           ),
           if (token != null) ...{
-            _ListTile(
+            ListTile1(
               text: tr('Remove Account'),
               icon: Ionicons.person,
               onTap: () {
@@ -275,7 +275,7 @@ class _SettingsState extends State<Settings> {
             SliverSizedBox(height: 2.h),
             authNotifier.logoutLoading
                 ? const AppLoadingIndicator()
-                : _ListTile(
+                : ListTile1(
                     text: tr('Logout'),
                     icon: Ionicons.log_out,
                     onTap: () async {
@@ -301,12 +301,13 @@ class _SettingsState extends State<Settings> {
             SliverSizedBox(height: 2.h),
             authNotifier.logoutLoading
                 ? const AppLoadingIndicator()
-                : _ListTile(
+                : ListTile1(
                     text: tr('Login'),
                     icon: Ionicons.log_in,
                     onTap: () async {
                       // rxPrefs.remove('token');
                       rxPrefs.remove('guestToken');
+                      rxPrefs.remove('isVis');
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
@@ -355,8 +356,9 @@ class _AppBar extends StatelessWidget {
   }
 }
 
-class _ListTile extends StatelessWidget {
-  const _ListTile({
+class ListTile1 extends StatelessWidget {
+  const ListTile1({
+    super.key,
     required this.text,
     required this.icon,
     required this.onTap,
