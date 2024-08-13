@@ -34,7 +34,7 @@ class UniLinkClient {
       switch (uri.pathSegments[0]) {
         case UniVars.GROUP:
           Get.offAll(() => const WelcomeScreen());
-          Get.to(ExploreGroupDetailsScreen(groupId: id, fromUnilink: true));
+          Get.to(ExploreGroupDetailsScreen(groupId: id));
           break;
       }
     } catch (e, s) {

@@ -1610,6 +1610,7 @@ class ApiProvider {
             ),
           ),
         );
+        
       } else if (response.statusCode == 401) {
         await refreshToken();
         joinGroup(groupId);

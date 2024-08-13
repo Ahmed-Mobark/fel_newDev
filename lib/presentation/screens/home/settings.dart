@@ -46,6 +46,7 @@ class _SettingsState extends State<Settings> {
   void initState() {
     super.initState();
     _getToken();
+    _loadNotificationPreference();
   }
 
   _getToken() async {
@@ -72,16 +73,37 @@ class _SettingsState extends State<Settings> {
     }
   }
 
-  void toggleNotifications(bool enabled) {
+  Future<void> _loadNotificationPreference() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _switchNotification = prefs.getBool('notifications') ?? false;
+    });
+    // Optionally, you can also subscribe or unsubscribe based on the saved value
+    toggleNotifications(_switchNotification ?? false);
+  }
+
+  Future<void> _saveNotificationPreference(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('notifications', value);
+  }
+
+  Future<void> toggleNotifications(bool enabled) async {
     final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+
     if (enabled) {
-      // Subscribe to notifications
-      _firebaseMessaging.subscribeToTopic('notifications');
-      log("message>>>>");
+      try {
+        await _firebaseMessaging.subscribeToTopic('notifications');
+        log("Subscribed to notifications");
+      } catch (e) {
+        log("Error subscribing to notifications: $e");
+      }
     } else {
-      // Unsubscribe from notifications
-      _firebaseMessaging.unsubscribeFromTopic('notifications');
-      log("not enable>>>>");
+      try {
+        await _firebaseMessaging.unsubscribeFromTopic('notifications');
+        log("Unsubscribed from notifications");
+      } catch (e) {
+        log("Error unsubscribing from notifications: $e");
+      }
     }
   }
 
@@ -190,7 +212,7 @@ class _SettingsState extends State<Settings> {
           //   //   duration: 750,
           //   // ),
           // },
-          //mobark
+
           ListTile1(
             text: tr('notifications'),
             icon: Ionicons.notifications,
@@ -200,7 +222,7 @@ class _SettingsState extends State<Settings> {
                 setState(() {
                   _switchNotification = v;
                 });
-                toggleNotifications(v);
+                await toggleNotifications(v);
               },
             ),
             onTap: () {},

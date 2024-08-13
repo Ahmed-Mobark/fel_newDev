@@ -284,8 +284,13 @@ class GroupMatches extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Listening to changes in the matchesLoading state
     final groupNotifier = Provider.of<GroupNotifier>(context);
-    final groupedMatches = groupByStartDate(groupNotifier.groupsMatchesModel);
+
+    // Group matches by start date outside the build method
+    final groupedMatches = _groupByStartDate(
+      groupNotifier.groupsMatchesModel,
+    );
 
     if (groupNotifier.matchesLoading) {
       return const Center(
@@ -332,7 +337,8 @@ class GroupMatches extends StatelessWidget {
     }
   }
 
-  List<List<GroupMatchesModel>> groupByStartDate(
+  // This method does not trigger any state changes and is safe to call in build
+  List<List<GroupMatchesModel>> _groupByStartDate(
     List<GroupMatchesModel> matches,
   ) {
     final Map<DateTime, List<GroupMatchesModel>> groupedMatches = {};

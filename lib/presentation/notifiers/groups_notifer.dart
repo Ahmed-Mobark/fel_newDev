@@ -188,16 +188,21 @@ class GroupNotifier extends ChangeNotifier {
   bool get userGroupsLoading => _userGroupsLoading;
   getUserGroups() async {
     _userGroupsLoading = true;
-    notifyListeners();
+    notifyListeners(); // Notify here before the async operation begins.
+
     try {
       userGroups =
           await ApiProvider(httpClient: Dio()).getUserGroups(myGroupFilter);
       userGroups.map((e) => log(e.group.toString()));
-      _userGroupsLoading = false;
-      notifyListeners();
     } catch (e) {
+      // Handle error
+    } finally {
       _userGroupsLoading = false;
-      notifyListeners();
+
+      // Delay state change until after the build completes.
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        notifyListeners();
+      });
     }
   }
 

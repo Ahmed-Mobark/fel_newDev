@@ -6,7 +6,6 @@ import 'dart:io';
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:football_app/helpers/helpers.dart';
@@ -40,12 +39,10 @@ import '../screens.dart';
 class ExploreGroupDetailsScreen extends StatefulWidget {
   const ExploreGroupDetailsScreen({
     required this.groupId,
-    this.fromUnilink = false,
     super.key,
   });
 
   final String? groupId;
-  final bool fromUnilink;
 
   @override
   State<ExploreGroupDetailsScreen> createState() =>
@@ -53,231 +50,174 @@ class ExploreGroupDetailsScreen extends StatefulWidget {
 }
 
 class _ExploreGroupDetailsScreenState extends State<ExploreGroupDetailsScreen> {
-  GroupNotifier? _groupNotifier;
+  late GroupNotifier _groupNotifier;
+  Future<dynamic> getData() async {
+    return await Future.delayed(Duration.zero).then((value) {
+      _groupNotifier = Provider.of<GroupNotifier>(context, listen: false);
+      _groupNotifier.getGroupById(widget.groupId ?? '');
+      _groupNotifier.groupMatches(widget.groupId ?? '');
+    });
+  }
 
   @override
   void initState() {
     super.initState();
-    final AuthNotifier authNotifier =
-        Provider.of<AuthNotifier>(context, listen: false);
-    if (authNotifier.userModel.data?.isGuest ?? false) {
-      Get.offAndToNamed('/login');
-    }
-    _groupNotifier = Provider.of<GroupNotifier>(context, listen: false);
-    _groupNotifier?.getGroupById(widget.groupId ?? '');
-    _groupNotifier?.groupMatches(widget.groupId ?? '');
-    _groupNotifier?.getAllUserGroups();
+    getData();
   }
 
   @override
   Widget build(BuildContext context) {
     final groupNotifier = Provider.of<GroupNotifier>(context, listen: true);
     final homeNotifier = Provider.of<HomeNotifier>(context, listen: true);
-    final AuthNotifier authNotifier =
-        Provider.of<AuthNotifier>(context, listen: true);
-    return WillPopScope(
-      onWillPop: () async {
-        if (widget.fromUnilink) {
-          Navigator.pushAndRemoveUntil(
-            context,
-            CupertinoPageRoute(builder: (_) => const VideoSplashPage()),
-            (route) => false,
-          );
-        } else {
-          Get.offAndToNamed('/welcome');
-        }
-        return true;
-      },
-      child: Scaffold(
-        body: groupNotifier.getGroupByIdLoading
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : CustomScrollView(
-                slivers: [
-                  SliverAppBar(
-                    centerTitle: true,
-                    pinned: true,
-                    title: FadeIn(
-                      duration: const Duration(milliseconds: 900),
-                      child: Text(
-                        groupNotifier.groupByIdModel.name ?? '',
-                        style: Get.textTheme.headlineMedium?.copyWith(
-                          fontFamily: "Algerian",
-                        ),
-                      ),
+    return Scaffold(
+      body: groupNotifier.getGroupByIdLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  centerTitle: true,
+                  iconTheme: const IconThemeData(color: Colors.white),
+                  pinned: true,
+                  title: FadeIn(
+                    duration: const Duration(milliseconds: 900),
+                    child: Text(
+                      groupNotifier.groupByIdModel.name ?? '',
+                      style: Get.textTheme.headlineMedium,
                     ),
-                    // actions: [
-                    //   FadeIn(
-                    //     child: IconButton(
-                    //       icon: const Icon(Ionicons.people),
-                    //       onPressed: () => Get.to(
-                    //         () => GroupMembersScreen(
-                    //           groupId: groupNotifier.groupByIdModel.id ?? '',
-                    //         ),
+                  ),
+                  actions: const [
+                    // FadeIn(
+                    //   child: IconButton(
+                    //     icon: const Icon(Ionicons.people),
+                    //     onPressed: () => Get.to(
+                    //       () => GroupMembersScreen(
+                    //         groupId: groupNotifier.groupByIdModel.id ?? '',
                     //       ),
                     //     ),
                     //   ),
-                    // ],
-                    automaticallyImplyLeading: false,
-                    leading: BackButton(
-                      color: Colors.white,
-                      onPressed: () {
-                        if (widget.fromUnilink) {
-                          Navigator.pushAndRemoveUntil(
-                            context,
-                            CupertinoPageRoute(
-                              builder: (_) => const VideoSplashPage(),
-                            ),
-                            (route) => false,
-                          );
-                        } else {
-                          Get.offAndToNamed('/welcome');
-                        }
-                      },
-                    ),
-                  ),
-                  SliverToBoxAdapter(
-                    child: SizedBox(
-                      // margin: const EdgeInsets.symmetric(horizontal: 8),
-                      height: 35.h,
-                      width: double.maxFinite,
-                      child: Stack(
-                        children: [
-                          CachedNetworkImage(
-                            imageUrl: groupNotifier.groupByIdModel.groupLogo ??
-                                groupNotifier.groupByIdModel.logo ??
-                                homeNotifier.mainPageModel.groupBGImage ??
-                                '',
-                            imageBuilder: (context, imageProvider) => Stack(
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    // borderRadius: BorderRadius.circular(16),
-                                    color: Colors.transparent,
-                                    image: DecorationImage(
-                                      image: imageProvider,
-                                      fit: BoxFit.cover,
-                                    ),
+                    // ),
+                  ],
+                  automaticallyImplyLeading: true,
+                ),
+                SliverToBoxAdapter(
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 8),
+                    height: 34.h,
+                    width: double.infinity,
+                    child: Stack(
+                      children: [
+                        CachedNetworkImage(
+                          imageUrl: groupNotifier.groupByIdModel.logo ??
+                              homeNotifier.mainPageModel.groupBGImage!,
+                          imageBuilder: (context, imageProvider) => Stack(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16),
+                                  color: Colors.transparent,
+                                  image: DecorationImage(
+                                    image: imageProvider,
                                   ),
                                 ),
-                                Container(
-                                  width: double.maxFinite,
-                                  decoration: BoxDecoration(
-                                    // borderRadius: BorderRadius.circular(16),
-                                    gradient: LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors: [
-                                        Colors.transparent,
-                                        Colors.transparent,
-                                        Colors.black.withOpacity(0.3),
-                                      ],
-                                    ),
+                              ),
+                              Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16),
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      Colors.transparent,
+                                      Colors.transparent,
+                                      Colors.black.withOpacity(0.3),
+                                      Colors.black.withOpacity(0.8),
+                                    ],
                                   ),
                                 ),
-                              ],
-                            ),
-                            width: double.maxFinite,
-                            fit: BoxFit.cover,
-                            errorWidget: (context, url, error) =>
-                                const SizedBox.shrink(),
+                              ),
+                            ],
                           ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.symmetric(
-                              vertical: 8,
-                              horizontal: 16,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const Spacer(),
-                                Align(
-                                  alignment: AlignmentDirectional.centerEnd,
-                                  child: HorizontalAnimation(
-                                    duration: 950,
-                                    child: Text(
-                                      groupNotifier
-                                              .groupByIdModel.description ??
-                                          '',
-                                      style:
-                                          Get.textTheme.displayMedium?.copyWith(
-                                        fontFamily: "Algerian",
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: 2.h),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    GroupsAdditionalData(
-                                      animationDuration: 900,
-                                      data: groupNotifier
-                                              .groupByIdModel.membersCount ??
-                                          0,
-                                      icon: Ionicons.people,
-                                      color: Colors.white,
-                                    ),
-                                    GroupsAdditionalData(
-                                      animationDuration: 900,
-                                      data: groupNotifier
-                                          .groupByIdModel.totalPoints,
-                                      icon: Ionicons.trophy,
-                                      color: Colors.white,
-                                    ),
-                                    GroupsAdditionalData(
-                                      animationDuration: 900,
-                                      data: groupNotifier.groupByIdModel.rank,
-                                      color: Colors.white,
-                                      icon: FontAwesomeIcons.rankingStar,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SliverToBoxAdapter(
-                    child: GroupMatches(
-                      groupId: widget.groupId,
-                      notClickable: true,
-                    ),
-                  ),
-                  SliverSizedBox(
-                    height: 10.h,
-                  ),
-                ],
-              ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: groupNotifier.userGroupIDS
-                .containsValue(widget.groupId)
-            ? null
-            : groupNotifier.joinGroupLoading
-                ? const CircularProgressIndicator()
-                : SizedBox(
-                    width: 90.w,
-                    child: FloatingActionButton.extended(
-                      backgroundColor: kColorPrimary,
-                      onPressed: (authNotifier.userModel.data?.isGuest ?? false)
-                          ? () => showDialog(
-                                context: context,
-                                builder: (context) => const LoginPopUp(),
-                              )
-                          : () => groupNotifier.joinGroup(widget.groupId ?? ''),
-                      label: Text(
-                        tr('join_group'),
-                        style: const TextStyle(
-                          fontFamily: "Algerian",
+                          width: double.infinity,
+                          fit: BoxFit.contain,
+                          errorWidget: (context, url, error) =>
+                              const SizedBox.shrink(),
                         ),
-                      ).tr(),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.symmetric(
+                            vertical: 8,
+                            horizontal: 16,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Spacer(),
+                              Align(
+                                alignment: AlignmentDirectional.centerEnd,
+                                child: HorizontalAnimation(
+                                  duration: 950,
+                                  child: Text(
+                                    groupNotifier.groupByIdModel.description ??
+                                        '',
+                                    style: Get.textTheme.displayMedium,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 2.h),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  GroupsAdditionalData(
+                                    animationDuration: 900,
+                                    data: groupNotifier
+                                            .groupByIdModel.membersCount ??
+                                        0,
+                                    icon: Ionicons.people,
+                                    color: Colors.white,
+                                  ),
+                                  GroupsAdditionalData(
+                                    animationDuration: 900,
+                                    data: groupNotifier
+                                        .groupByIdModel.totalPoints,
+                                    icon: Ionicons.trophy,
+                                    color: Colors.white,
+                                  ),
+                                  GroupsAdditionalData(
+                                    animationDuration: 900,
+                                    data: groupNotifier.groupByIdModel.rank,
+                                    color: Colors.white,
+                                    icon: FontAwesomeIcons.rankingStar,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
+                ),
+                const SliverToBoxAdapter(
+                  child: GroupMatches(),
+                ),
+                SliverSizedBox(
+                  height: 10.h,
+                ),
+              ],
+            ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: SizedBox(
+        width: 90.w,
+        child: FloatingActionButton.extended(
+          backgroundColor: kColorPrimary,
+          onPressed: () => Provider.of<GroupNotifier>(context, listen: false)
+              .joinGroup(widget.groupId ?? ''),
+          label: const Text('Join Group').tr(),
+        ),
       ),
     );
   }
@@ -298,8 +238,6 @@ class UserGroupDetailsScreen extends StatefulWidget {
 }
 
 class _UserGroupDetailsScreenState extends State<UserGroupDetailsScreen> {
-  GroupNotifier? _groupNotifier;
-
   final GlobalKey _copy = GlobalKey();
   final GlobalKey _share = GlobalKey();
   bool isShowText = false;
@@ -318,18 +256,23 @@ class _UserGroupDetailsScreenState extends State<UserGroupDetailsScreen> {
     });
   }
 
+  Future<dynamic> getData() async {
+    return await Future.delayed(Duration.zero).then((value) {
+      Provider.of<GroupNotifier>(context, listen: false)
+          .groupMatches(widget.group?.groupId ?? '');
+      Provider.of<GroupNotifier>(context, listen: false)
+          .getGroupMembers(widget.group?.groupId ?? '');
+      Provider.of<GroupNotifier>(context, listen: false)
+          .getRoundGroupMembers(widget.group?.groupId ?? '');
+      Provider.of<GroupNotifier>(context, listen: false)
+          .setLeagueIdForGroupScreen(int.parse(widget.group!.id!));
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    log(widget.group!.id!);
-    log(widget.group!.group!.id!);
-    log(widget.groupIndex.toString());
-    _groupNotifier = Provider.of<GroupNotifier>(context, listen: false);
-    _groupNotifier?.groupMatches(widget.group?.groupId ?? '');
-    _groupNotifier?.getGroupMembers(widget.group?.groupId ?? '');
-    _groupNotifier?.getRoundGroupMembers(widget.group?.groupId ?? '');
-    _groupNotifier?.setLeagueIdForGroupScreen(int.parse(widget.group!.id!));
-
+    getData();
     _startShowCase();
   }
 
@@ -341,6 +284,7 @@ class _UserGroupDetailsScreenState extends State<UserGroupDetailsScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+        iconTheme: const IconThemeData(color: Colors.white),
         // pinned: true,
         title: FadeIn(
           child: Text(
@@ -413,16 +357,6 @@ class _UserGroupDetailsScreenState extends State<UserGroupDetailsScreen> {
                 ),
               ),
             ),
-          // FadeIn(
-          //   child: IconButton(
-          //     icon: const Icon(Ionicons.people),
-          //     onPressed: () => Get.to(
-          //       () => GroupMembersScreen(
-          //         groupId: widget.group?.groupId ?? '',
-          //       ),
-          //     ),
-          //   ),
-          // ),
         ],
       ),
       body: Column(

@@ -78,7 +78,7 @@ class _MyAppState extends State<MyApp> {
     _initUniLinks();
     InternetFunction.isConnectedToInternet.stream
         .listen(internetConnectionHandler);
-//mobark
+
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       if (rxPrefs.getInt('count') == 0 || rxPrefs.getInt('count') == null) {
         count = 0;
