@@ -140,6 +140,7 @@ class GroupNotifier extends ChangeNotifier {
   getGroupById(String id) async {
     try {
       _getGroupByIdLoading = true;
+      notifyListeners();
       await ApiProvider(httpClient: Dio()).getGroupById(id).then((value) {
         groupByIdModel = value;
         _getGroupByIdLoading = false;

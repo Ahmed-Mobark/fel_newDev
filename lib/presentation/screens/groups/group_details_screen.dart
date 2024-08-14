@@ -7,6 +7,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:football_app/helpers/helpers.dart';
 import 'package:football_app/helpers/loading.dart';
@@ -23,6 +24,7 @@ import 'package:football_app/presentation/widgets/w_groups.dart';
 import 'package:football_app/presentation/widgets/widgets.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:rx_shared_preferences/rx_shared_preferences.dart';
 import 'package:share_plus/share_plus.dart';
@@ -67,148 +69,147 @@ class _ExploreGroupDetailsScreenState extends State<ExploreGroupDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final groupNotifier = Provider.of<GroupNotifier>(context, listen: true);
-    final homeNotifier = Provider.of<HomeNotifier>(context, listen: true);
     return Scaffold(
-      body: groupNotifier.getGroupByIdLoading
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : CustomScrollView(
-              slivers: [
-                SliverAppBar(
-                  centerTitle: true,
-                  iconTheme: const IconThemeData(color: Colors.white),
-                  pinned: true,
-                  title: FadeIn(
-                    duration: const Duration(milliseconds: 900),
-                    child: Text(
-                      groupNotifier.groupByIdModel.name ?? '',
-                      style: Get.textTheme.headlineMedium,
+      body: Consumer<GroupNotifier>(
+          builder: (BuildContext context, value, Widget? child) {
+        return value.getGroupByIdLoading
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : CustomScrollView(
+                slivers: [
+                  SliverAppBar(
+                    centerTitle: true,
+                    iconTheme: const IconThemeData(color: Colors.white),
+                    pinned: true,
+                    title: FadeIn(
+                      duration: const Duration(milliseconds: 900),
+                      child: Text(
+                        value.groupByIdModel.name ?? '',
+                        style: Get.textTheme.headlineMedium,
+                      ),
                     ),
+                    actions: const [
+                      // FadeIn(
+                      //   child: IconButton(
+                      //     icon: const Icon(Ionicons.people),
+                      //     onPressed: () => Get.to(
+                      //       () => GroupMembersScreen(
+                      //         groupId: groupNotifier.groupByIdModel.id ?? '',
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                    ],
+                    automaticallyImplyLeading: true,
                   ),
-                  actions: const [
-                    // FadeIn(
-                    //   child: IconButton(
-                    //     icon: const Icon(Ionicons.people),
-                    //     onPressed: () => Get.to(
-                    //       () => GroupMembersScreen(
-                    //         groupId: groupNotifier.groupByIdModel.id ?? '',
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-                  ],
-                  automaticallyImplyLeading: true,
-                ),
-                SliverToBoxAdapter(
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 8),
-                    height: 34.h,
-                    width: double.infinity,
-                    child: Stack(
-                      children: [
-                        CachedNetworkImage(
-                          imageUrl: groupNotifier.groupByIdModel.logo ??
-                              homeNotifier.mainPageModel.groupBGImage!,
-                          imageBuilder: (context, imageProvider) => Stack(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(16),
-                                  color: Colors.transparent,
-                                  image: DecorationImage(
-                                    image: imageProvider,
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(16),
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [
-                                      Colors.transparent,
-                                      Colors.transparent,
-                                      Colors.black.withOpacity(0.3),
-                                      Colors.black.withOpacity(0.8),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
+                  SliverToBoxAdapter(
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 8),
+                      height: 34.h,
+                      width: double.infinity,
+                      child: Stack(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(16),
+                            child: CachedNetworkImage(
+                              imageUrl: value.groupByIdModel.groupLogo ??
+                                  Provider.of<HomeNotifier>(context,
+                                          listen: false)
+                                      .mainPageModel
+                                      .groupBGImage!,
+                              placeholder: (context, url) => const SizedBox(),
+                              height: 34.h,
+                              width: double.infinity,
+                              fit: BoxFit.fitHeight,
+                              errorWidget: (context, url, error) =>
+                                  const SizedBox.shrink(),
+                            ),
                           ),
-                          width: double.infinity,
-                          fit: BoxFit.contain,
-                          errorWidget: (context, url, error) =>
-                              const SizedBox.shrink(),
-                        ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.symmetric(
-                            vertical: 8,
-                            horizontal: 16,
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              color: Colors.transparent,
+                            ),
                           ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              const Spacer(),
-                              Align(
-                                alignment: AlignmentDirectional.centerEnd,
-                                child: HorizontalAnimation(
-                                  duration: 950,
-                                  child: Text(
-                                    groupNotifier.groupByIdModel.description ??
-                                        '',
-                                    style: Get.textTheme.displayMedium,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 2.h),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  GroupsAdditionalData(
-                                    animationDuration: 900,
-                                    data: groupNotifier
-                                            .groupByIdModel.membersCount ??
-                                        0,
-                                    icon: Ionicons.people,
-                                    color: Colors.white,
-                                  ),
-                                  GroupsAdditionalData(
-                                    animationDuration: 900,
-                                    data: groupNotifier
-                                        .groupByIdModel.totalPoints,
-                                    icon: Ionicons.trophy,
-                                    color: Colors.white,
-                                  ),
-                                  GroupsAdditionalData(
-                                    animationDuration: 900,
-                                    data: groupNotifier.groupByIdModel.rank,
-                                    color: Colors.white,
-                                    icon: FontAwesomeIcons.rankingStar,
-                                  ),
+                          Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Colors.transparent,
+                                  Colors.transparent,
+                                  Colors.black.withOpacity(0.3),
+                                  Colors.black.withOpacity(0.8),
                                 ],
                               ),
-                            ],
+                            ),
                           ),
-                        ),
-                      ],
+                          Padding(
+                            padding: const EdgeInsetsDirectional.symmetric(
+                              vertical: 8,
+                              horizontal: 16,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Spacer(),
+                                Align(
+                                  alignment: AlignmentDirectional.centerEnd,
+                                  child: HorizontalAnimation(
+                                    duration: 950,
+                                    child: Text(
+                                      value.groupByIdModel.description ?? '',
+                                      style: Get.textTheme.displayMedium,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 2.h),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    GroupsAdditionalData(
+                                      animationDuration: 900,
+                                      data: value.groupByIdModel.membersCount ??
+                                          0,
+                                      icon: Ionicons.people,
+                                      color: Colors.white,
+                                    ),
+                                    GroupsAdditionalData(
+                                      animationDuration: 900,
+                                      data: value.groupByIdModel.totalPoints,
+                                      icon: Ionicons.trophy,
+                                      color: Colors.white,
+                                    ),
+                                    GroupsAdditionalData(
+                                      animationDuration: 900,
+                                      data: value.groupByIdModel.rank,
+                                      color: Colors.white,
+                                      icon: FontAwesomeIcons.rankingStar,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                const SliverToBoxAdapter(
-                  child: GroupMatches(),
-                ),
-                SliverSizedBox(
-                  height: 10.h,
-                ),
-              ],
-            ),
+                  const SliverToBoxAdapter(
+                    child: GroupMatches(),
+                  ),
+                  SliverSizedBox(
+                    height: 10.h,
+                  ),
+                ],
+              );
+      }),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: SizedBox(
         width: 90.w,
