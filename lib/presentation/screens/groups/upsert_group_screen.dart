@@ -348,6 +348,7 @@ class LeaguesList extends StatelessWidget {
       shrinkWrap: true,
       itemBuilder: (context, index) => RadioListTile<int>(
         groupValue: groupNotifier.leagueId,
+        activeColor: Colors.white,
         onChanged: (value) {
           groupNotifier.setLeagueId(value);
           groupNotifier.setLeagueName(
@@ -376,6 +377,7 @@ class LeaguesList extends StatelessWidget {
               ? leagueNotifier.leaguesModel[index].arName ?? ""
               : leagueNotifier.leaguesModel[index].name ?? "",
           style: const TextStyle(
+            color: Colors.white,
             fontFamily: "Algerian",
           ),
         ),

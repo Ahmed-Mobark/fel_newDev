@@ -1,0 +1,12 @@
+[
+    {
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.felapp.sports.football_appnew",
+        "sha256_cert_fingerprints": [
+          "66:62:3E:55:66:F6:D0:FA:2D:86:D3:CC:4B:6A:6A:74:1F:4F:BC:F2:5A:BE:51:7D:F6:50:BD:C9:EF:CF:BB:72"
+        ]
+      }
+    }
+  ]

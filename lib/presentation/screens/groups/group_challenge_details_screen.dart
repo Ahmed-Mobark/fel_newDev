@@ -17,12 +17,13 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 class GroupChallengeDetailsScreen extends StatelessWidget {
-  const GroupChallengeDetailsScreen(
-      {super.key,
-      required this.challengeModel,
-      this.groupId,
-      this.group,
-      this.fromChallenges = false});
+  const GroupChallengeDetailsScreen({
+    super.key,
+    required this.challengeModel,
+    this.groupId,
+    this.group,
+    this.fromChallenges = false,
+  });
 
   final GroupMatchesModel challengeModel;
   final String? groupId;
@@ -52,11 +53,16 @@ class GroupChallengeDetailsScreen extends StatelessWidget {
           : groupsNotifier.challengeLoading
               ? const Align(
                   alignment: Alignment.bottomCenter,
-                  child: CircularProgressIndicator())
+                  child: CircularProgressIndicator(),
+                )
               : Container(
                   width: context.width,
                   margin: const EdgeInsets.only(
-                      bottom: 20, top: 10, left: 10, right: 10),
+                    bottom: 20,
+                    top: 10,
+                    left: 10,
+                    right: 10,
+                  ),
                   child: FilledButton(
                     onPressed: () async {
                       AnswersofchallengeParam param = AnswersofchallengeParam(
@@ -66,10 +72,12 @@ class GroupChallengeDetailsScreen extends StatelessWidget {
                         awayGoals: groupsNotifier.predictionawaygoalValue,
                         bonus: groupsNotifier.predictionBonusValue,
                       );
-                      await groupsNotifier.answerChallenge(param,
-                          fromChallenges: fromChallenges,
-                          groupMatchModel: challengeModel,
-                          userGroupModel: group);
+                      await groupsNotifier.answerChallenge(
+                        param,
+                        fromChallenges: fromChallenges,
+                        groupMatchModel: challengeModel,
+                        userGroupModel: group,
+                      );
 
                       // groupsNotifier.groupMatches(groupId ?? '');
                       // Navigator.pop(context);
@@ -80,7 +88,7 @@ class GroupChallengeDetailsScreen extends StatelessWidget {
                     ).tr(),
                   ),
                 ),
-      body: Container(
+      body: SizedBox(
         height: context.height - 100,
         child: ListView(
           primary: true,
@@ -164,7 +172,10 @@ class GroupChallengeHeader extends StatelessWidget {
                 ? ''
                 : adminChallenges.homeGoals.toString(),
             style: const TextStyle(
-                fontSize: 20, fontFamily: "Algerian", color: Colors.white),
+              fontSize: 20,
+              fontFamily: "Algerian",
+              color: Colors.white,
+            ),
             //  style: Get.textTheme.headlineMedium,
             textAlign: TextAlign.center,
           ),
@@ -189,9 +200,10 @@ class GroupChallengeHeader extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 10),
                   child: Text(
                     DateFormat.Hm("en").format(
-                        DateFormat("yyyy-MM-ddTHH:mm:ssZ", 'en')
-                            .parseUTC(adminChallenges.startDate ?? "")
-                            .toLocal()),
+                      DateFormat("yyyy-MM-ddTHH:mm:ssZ", 'en')
+                          .parseUTC(adminChallenges.startDate ?? "")
+                          .toLocal(),
+                    ),
                     style: TextStyle(
                       fontFamily: "Algerian",
                       color: Colors.yellow,
@@ -209,7 +221,10 @@ class GroupChallengeHeader extends StatelessWidget {
                 : adminChallenges.awayGoals.toString(),
             // style: Get.textTheme.headlineMedium,
             style: const TextStyle(
-                fontSize: 20, fontFamily: "Algerian", color: Colors.white),
+              fontSize: 20,
+              fontFamily: "Algerian",
+              color: Colors.white,
+            ),
             textAlign: TextAlign.center,
           ),
           Expanded(
@@ -280,11 +295,12 @@ class WinLoseQuestionWidget extends StatelessWidget {
 }
 
 class ChallengeWidget extends StatefulWidget {
-  const ChallengeWidget(
-      {super.key,
-      required this.adminChallengesModel,
-      required this.question,
-      required this.questionindex});
+  const ChallengeWidget({
+    super.key,
+    required this.adminChallengesModel,
+    required this.question,
+    required this.questionindex,
+  });
   final GroupMatchesModel adminChallengesModel;
   final Questions question;
   final int questionindex;
@@ -322,13 +338,11 @@ class _ChallengeWidgetState extends State<ChallengeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final groupsNotifier = Provider.of<GroupNotifier>(context, listen: true);
+    final groupsNotifier = Provider.of<GroupNotifier>(context, listen: false);
     return Container(
       color: kColorCard,
       margin: const EdgeInsetsDirectional.symmetric(horizontal: 2),
       padding: const EdgeInsetsDirectional.symmetric(vertical: 16),
- 
-
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -364,8 +378,8 @@ class _ChallengeWidgetState extends State<ChallengeWidget> {
                           //    x = widget.question.answers![index].length;
                           if (DateFormat("yyyy-MM-ddTHH:mm:ssZ", 'en')
                                   .parseUTC(
-                                      widget.adminChallengesModel.startDate ??
-                                          "")
+                                    widget.adminChallengesModel.startDate ?? "",
+                                  )
                                   .isAfter(DateTime.now()) &&
                               (widget.adminChallengesModel.predictions ==
                                       null ||
@@ -397,19 +411,19 @@ class _ChallengeWidgetState extends State<ChallengeWidget> {
                         ),
                       ),
                     Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal:
-                                widget.adminChallengesModel.predictions != null
-                                    ? 30
-                                    : 0,
-                            vertical: widget.adminChallengesModel.predictions !=
-                                    null
+                      padding: EdgeInsets.symmetric(
+                        horizontal:
+                            widget.adminChallengesModel.predictions != null
+                                ? 30
+                                : 0,
+                        vertical:
+                            widget.adminChallengesModel.predictions != null
                                 ? 4
-                                : 0),
-                        child: Text(widget.adminChallengesModel.predictions ==
-                                    null ||
-                                (widget.adminChallengesModel.predictions
-                                        ?.isEmpty ??
+                                : 0,
+                      ),
+                      child: Text(
+                        widget.adminChallengesModel.predictions == null ||
+                                (widget.adminChallengesModel.predictions?.isEmpty ??
                                     false)
                             ? listofindex[index].toString() ?? '0'
                             : (index == 0
@@ -417,15 +431,17 @@ class _ChallengeWidgetState extends State<ChallengeWidget> {
                                         .first.homeGoals
                                     : widget.adminChallengesModel.predictions!
                                         .first.awayGoals)
-                                .toString())),
+                                .toString(),
+                      ),
+                    ),
                     if (widget.adminChallengesModel.predictions?.isEmpty ??
                         false)
                       IconButton(
                         onPressed: () {
                           if (DateFormat("yyyy-MM-ddTHH:mm:ssZ", 'en')
                                   .parseUTC(
-                                      widget.adminChallengesModel.startDate ??
-                                          "")
+                                    widget.adminChallengesModel.startDate ?? "",
+                                  )
                                   .isAfter(DateTime.now()) &&
                               (widget.adminChallengesModel.predictions ==
                                       null ||
@@ -464,7 +480,8 @@ class _ChallengeWidgetState extends State<ChallengeWidget> {
             },
           ),
           ChallengePredictionBonusListTile(
-              adminChallengesModel: widget.adminChallengesModel),
+            adminChallengesModel: widget.adminChallengesModel,
+          ),
         ],
       ),
     );
@@ -492,8 +509,10 @@ class _ChallengeWidgetState extends State<ChallengeWidget> {
 }
 
 class ChallengePredictionBonusListTile extends StatelessWidget {
-  const ChallengePredictionBonusListTile(
-      {super.key, required this.adminChallengesModel});
+  const ChallengePredictionBonusListTile({
+    super.key,
+    required this.adminChallengesModel,
+  });
 
   final GroupMatchesModel adminChallengesModel;
 
@@ -540,12 +559,15 @@ class ChallengePredictionBonusListTile extends StatelessWidget {
             ),
           Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: adminChallengesModel.predictions != null ? 30 : 0,
-                vertical: adminChallengesModel.predictions != null ? 4 : 0),
-            child: Text(adminChallengesModel.predictions == null ||
-                    (adminChallengesModel.predictions?.isEmpty ?? false)
-                ? groupsNotifier.predictionBonusValue.toString()
-                : adminChallengesModel.predictions!.first.bonus.toString()),
+              horizontal: adminChallengesModel.predictions != null ? 30 : 0,
+              vertical: adminChallengesModel.predictions != null ? 4 : 0,
+            ),
+            child: Text(
+              adminChallengesModel.predictions == null ||
+                      (adminChallengesModel.predictions?.isEmpty ?? false)
+                  ? groupsNotifier.predictionBonusValue.toString()
+                  : adminChallengesModel.predictions!.first.bonus.toString(),
+            ),
           ),
           if (adminChallengesModel.predictions?.isEmpty ?? false)
             IconButton(

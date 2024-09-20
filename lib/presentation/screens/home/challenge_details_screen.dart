@@ -763,7 +763,7 @@ class WinLoseQuestionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final groupNotifier = Provider.of<GroupNotifier>(context);
+    final groupNotifier = Provider.of<GroupNotifier>(context, listen: false);
     return CarouselSlider(
       items: [
         ChallengeWidget(
@@ -798,7 +798,7 @@ class PredictionResultListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final groupsNotifier = Provider.of<GroupNotifier>(context, listen: true);
+    final groupsNotifier = Provider.of<GroupNotifier>(context, listen: false);
     return ListTile(
       title: Text(
         answer,

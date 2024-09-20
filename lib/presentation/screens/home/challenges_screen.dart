@@ -6,7 +6,7 @@ class ChallengesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final HomeNotifier homeNotifier =
-        Provider.of<HomeNotifier>(context, listen: true);
+        Provider.of<HomeNotifier>(context, listen: false);
 
     return Scaffold(
       appBar: AppBar(

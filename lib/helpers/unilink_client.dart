@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -24,7 +26,6 @@ class UniLinkClient {
 
     if (uri.pathSegments.length < 2) return;
     if (!UniVars.values.contains(uri.pathSegments[0])) return;
-    // TODO: Might want to send to crashlytics.
 
     final id = uri.pathSegments[1];
 
@@ -34,7 +35,7 @@ class UniLinkClient {
       switch (uri.pathSegments[0]) {
         case UniVars.GROUP:
           Get.offAll(() => const WelcomeScreen());
-          Get.to(ExploreGroupDetailsScreen(groupId: id));
+          Get.to(ExploreGroupDetailsScreen(groupId: id, fromUnilink: true));
           break;
       }
     } catch (e, s) {
