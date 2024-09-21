@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:football_app/core/providers.dart';
@@ -112,10 +113,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> _initUniLinks() async {
     try {
-      // Delay added for splash screen
-      await Future.delayed(const Duration(seconds: 3));
-
-      // Handle initial link
+      // Check for the initial link when the app opens
       final String? initialLink = await uni_links.getInitialLink();
       if (initialLink != null && initialLink.isNotEmpty) {
         fromUniLink = true;
@@ -133,9 +131,13 @@ class _MyAppState extends State<MyApp> {
       fromUniLink = false;
       setState(() {});
       Fluttertoast.showToast(msg: tr('cannot_open_url'));
-      print('Error handling deep link: $e\nStacktrace: $s');
+      if (kDebugMode) {
+        print('Error handling deep link: $e\nStacktrace: $s');
+      }
     }
   }
+
+// For iOS and Android, add this to check if the app is installed
 
   @override
   void dispose() {
